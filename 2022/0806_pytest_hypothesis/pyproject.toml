@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "0806_pytest_hypothesis"
+version = "0.1.0"
+description = ""
+authors = ["s17er <sinnerthesinner@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pytest = "^7.1.2"
+hypothesis = "^6.54.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
