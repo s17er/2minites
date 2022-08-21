@@ -1,7 +1,12 @@
 import collections
+from typing import NamedTuple
 
 #Card = collections.namedtuple('Card', ['rank', 'suit'])
-Card = collections.namedtuple('Card', 'rank suit')
+#Card = collections.namedtuple('Card', 'rank suit')
+
+class Card(NamedTuple):
+    rank: str
+    suit: str
 
 class FrenchDeck:
     ranks = [str(n) for n in range(2, 11)] + list('JQKA')
@@ -44,5 +49,8 @@ if __name__ == '__main__':
     print('--- Higher')
     for card in sorted(deck, key=spades_high):
         print(card)
+    
+    print('--- Dict')
+    print(deck[3]._asdict())
     
     
