@@ -8,6 +8,19 @@ def various_dict_def():
     print(a == b == c == d == e)
     print(a)
     
+def dict_comprehension():
+    CODES = [
+       (5, "fly"),
+       (1, "beta"),
+       (0, "apple"),
+       (8, "integer"),
+    ]
+    d = {word: num for num, word in CODES}
+    print(d)
+    d = {num: word.upper() for word, num in d.items() if num > 2}
+    print(d)
+    
 
 if __name__ == '__main__':
-    various_dict_def()
+    #various_dict_def()
+    dict_comprehension()
