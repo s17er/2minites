@@ -1,3 +1,4 @@
+import collections
 
 def various_dict_def():
     a = dict(one=1, two=2, three=3)
@@ -20,7 +21,18 @@ def dict_comprehension():
     d = {num: word.upper() for word, num in d.items() if num > 2}
     print(d)
     
+def use_defaultdict():
+    index = collections.defaultdict(list)
+    index['a'] = [0,1,2]
+    index['b'] = [3,4,5]
+    print(index)
+    l = ['a', 'b', 'c']
+    for c in l:
+        index[c].append(100)
+    print(index)
+    
 
 if __name__ == '__main__':
     #various_dict_def()
-    dict_comprehension()
+    #dict_comprehension()
+    use_defaultdict()
