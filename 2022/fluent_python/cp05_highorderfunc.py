@@ -22,6 +22,7 @@ def filter_alter():
 def reduce_alter():
     from functools import reduce
     from operator import add
+    # These results are same.
     print(reduce(add, range(100)))
     print(sum( range(100)))
 
