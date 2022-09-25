@@ -91,5 +91,6 @@ def main(n):
     print(f'{t_diff}s proceed.')
         
 if __name__ == '__main__':
-    main(5)
+    print('QUICK SORT')
+    main(4)
     #main_simple()
