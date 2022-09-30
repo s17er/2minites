@@ -36,10 +36,16 @@ def expected(rank, division, rate):
     
     
 def main():
-    print(expected(2, 3, [30,25,19,26]))
-    print(expected(2, 3, [25.5,24,22.5,28]))
+    # janketu3
+    #print(expected(2, 3, [30,25,19,26]))
+    #print(expected(2, 3, [25.5,24,22.5,28]))
+    print('G')
+    print(expected(2, 3, [27,27,24,22]))
     
+    print('My gold')
+    print(expected(2, 3, [31.15,28.42,25.14,15.3]))
     my = [27.5,27.5,24,21]
+    print('My gyoku')
     print(expected(3, 3, my))
     print(expected(4, 2, my))
     
