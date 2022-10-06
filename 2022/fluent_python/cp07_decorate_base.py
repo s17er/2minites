@@ -6,6 +6,9 @@ def deco(func):
 @deco
 def target():
     print('running target()')
+'''
+target = deco(target)
+'''
 
 if __name__ == '__main__':
     target() # print 'inner'
