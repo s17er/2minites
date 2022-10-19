@@ -13,8 +13,8 @@ class Vector2d:
         return (i for i in (self.x, self.y))
         
     def __repr__(self) -> str:
-        class_name = 'Vector2d' #type(self).__name__
-        return '{}{!r}, {!r}'.format(class_name, *self)
+        class_name = type(self).__name__
+        return '{}({!r}, {!r})'.format(class_name, *self)
     
     def __str__(self) -> str:
         return str(tuple(self))
@@ -39,13 +39,21 @@ class Vector2d:
     def __mul__(self, scalar) -> object:
         return Vector2d(self.x * scalar, self.y * scalar)
     
+    @classmethod
+    def frombytes(cls, octets):
+        typecode = chr(octets[0])
+        memv = memoryview(octets[1:]).cast(typecode)
+        return cls(*memv)
+    
 if __name__ == '__main__':
     v = Vector2d(5, 10)
     print(v.x, v.y)
     x, y = v
     print(x, y)
-    #v_clone = eval(repr(v))
-    #print(v_clone == v)
+
+    print(repr(v))
+    v_clone = eval(repr(v))
+    print(v_clone == v)
     
     octets = bytes(v)
     print(octets)
