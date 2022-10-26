@@ -39,6 +39,10 @@ class Vector2d:
     def __mul__(self, scalar) -> object:
         return Vector2d(self.x * scalar, self.y * scalar)
     
+    def __format__(self, __format_spec: str = "") -> str:
+        components = (format(c, __format_spec) for c in self)
+        return '({}, {})'.format(*components)
+    
     @classmethod
     def frombytes(cls, octets):
         typecode = chr(octets[0])
@@ -60,4 +64,8 @@ if __name__ == '__main__':
     
     print(abs(v))
     print(bool(v), bool(Vector2d(0,0)))
+    
+    print(format(v))
+    print(format(v, '.2f'))
+    print(format(v, '.3e'))
 
