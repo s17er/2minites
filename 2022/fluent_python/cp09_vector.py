@@ -1,5 +1,6 @@
 from array import array
 from math import hypot
+import math
 
 class Vector2d:
     
@@ -8,6 +9,9 @@ class Vector2d:
     def __init__(self, x, y) -> None:
         self.x = float(x)
         self.y = float(y)
+        
+    def angle(self):
+        return math.atan2(self.y, self.x)
         
     def __iter__(self):
         return (i for i in (self.x, self.y))
@@ -39,9 +43,16 @@ class Vector2d:
     def __mul__(self, scalar) -> object:
         return Vector2d(self.x * scalar, self.y * scalar)
     
-    def __format__(self, __format_spec: str = "") -> str:
-        components = (format(c, __format_spec) for c in self)
-        return '({}, {})'.format(*components)
+    def __format__(self, fmt_spec: str = "") -> str:
+        if fmt_spec.endswith('p'):
+            fmt_spec = fmt_spec[:-1]
+            coords = (abs(self), self.angle())
+            outer_fmt = '<{}, {}>'
+        else:
+            coords = self
+            outer_fmt = '({}, {})'
+        components = (format(c, fmt_spec) for c in coords)
+        return outer_fmt.format(*components)
     
     @classmethod
     def frombytes(cls, octets):
@@ -68,4 +79,6 @@ if __name__ == '__main__':
     print(format(v))
     print(format(v, '.2f'))
     print(format(v, '.3e'))
+    print(format(v, 'p'))
+    print(format(v, '.3ep'))
 
