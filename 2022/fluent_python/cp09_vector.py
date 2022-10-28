@@ -7,8 +7,16 @@ class Vector2d:
     typecode = 'd'
     
     def __init__(self, x, y) -> None:
-        self.x = float(x)
-        self.y = float(y)
+        self.__x = float(x)
+        self.__y = float(y)
+        
+    @property
+    def x(self):
+        return self.__x
+    
+    @property
+    def y(self):
+        return self.__y
         
     def angle(self):
         return math.atan2(self.y, self.x)
@@ -54,6 +62,9 @@ class Vector2d:
         components = (format(c, fmt_spec) for c in coords)
         return outer_fmt.format(*components)
     
+    def __hash__(self):
+        return hash(self.x) ^ hash(self.y)
+    
     @classmethod
     def frombytes(cls, octets):
         typecode = chr(octets[0])
@@ -76,9 +87,19 @@ if __name__ == '__main__':
     print(abs(v))
     print(bool(v), bool(Vector2d(0,0)))
     
+    # format
     print(format(v))
     print(format(v, '.2f'))
     print(format(v, '.3e'))
     print(format(v, 'p'))
     print(format(v, '.3ep'))
+    
+    v1 = Vector2d(3, 4)
+    v2 = Vector2d(2, 5)
+    print(hash(v1))
+    print(hash(v2))
+    s = set([v1, v2])
+    print(s)
+    
+    
 
