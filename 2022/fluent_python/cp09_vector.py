@@ -7,9 +7,16 @@ class Vector2d:
     typecode = 'd'
     
     def __init__(self, x, y) -> None:
+
+        # protect variants
         self.__x = float(x)
         self.__y = float(y)
         
+        # private variants (called most Pythonista)
+        self._z = 0 # ' _z in __dict__'
+        
+        self.s = 0 # 's in __dict__'
+
     @property
     def x(self):
         return self.__x
@@ -100,6 +107,9 @@ if __name__ == '__main__':
     print(hash(v2))
     s = set([v1, v2])
     print(s)
+    
+    print(v1.__dict__)
+    print(v1._Vector2d__x)
     
     
 
