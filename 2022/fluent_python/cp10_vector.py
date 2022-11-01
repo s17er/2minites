@@ -31,6 +31,12 @@ class Vector:
     
     def __bool__(self) -> bool:
         return bool(abs(self))
+        
+    def __len__(self):
+        return len(self._components)
+        
+    def __getitem__(self, index):
+        return self._components[index]
     
     @classmethod
     def frombytes(cls, octets):
@@ -42,3 +48,5 @@ if __name__ == '__main__':
     v = Vector([3.0, 4.0, 5.0, 6,0, 7.0, 8.0, 10.0])
     print(v)
     print(repr(v))
+    print(len(v))
+    print(v[3])
