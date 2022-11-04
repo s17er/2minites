@@ -1,4 +1,5 @@
 from array import array
+from curses.ascii import islower
 import reprlib
 import math
 import numbers
@@ -6,6 +7,7 @@ import numbers
 class Vector:
     
     typecode = 'd'
+    shortcut_names = 'xyzt'
     
     def __init__(self, components) -> None:
         self._components = array(self.typecode, components)
@@ -45,6 +47,29 @@ class Vector:
         else:
             msg = f'{cls.__name__} indices must be integers'
             raise TypeError(msg)
+            
+    def __setattr__(self, name: str, value: float) -> None:
+        cls = type(self)
+        if len(name) == 1:
+            if name in cls.shortcut_names:
+                error = 'readonly attribute {attr_name!r}'
+            elif name.islower():
+                error = "can't set attribute 'a' to 'z' in {cls_name!r}"
+            else:
+                error = ''
+            if error:
+                msg = error.format(cls_name=cls.__name__, attr_name=name)
+                raise AttributeError(msg)
+        super().__setattr__(name, value)
+
+    def __getattr__(self, name: str) -> float:
+        cls = type(self)
+        if len(name) == 1:
+            pos = cls.shortcut_names.find(name)
+            if 0 <= pos < len(self._components):
+                return self._components[pos]
+        msg = '{.__name__!r} object has not attribute {!r}' # !r is repr()
+        raise AttributeError(msg.format(cls, name))
     
     @classmethod
     def frombytes(cls, octets):
@@ -61,3 +86,17 @@ if __name__ == '__main__':
     print(v[1:4])
     #print(v['a']) #TypeError
     print(v[3:10])
+    
+    # access by attribute
+    print(v.x)
+    print(v.y)
+    print(v.z)
+    print(v.t)
+    #print(v.a) # Attribute Error
+
+    '''
+    v.x = 10 # readonly
+    print(v.x)
+    print(v.a)
+    print(repr(v))
+    '''
