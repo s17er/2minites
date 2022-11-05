@@ -3,6 +3,8 @@ from curses.ascii import islower
 import reprlib
 import math
 import numbers
+import functools
+import operator
 
 class Vector:
     
@@ -37,6 +39,10 @@ class Vector:
         
     def __len__(self):
         return len(self._components)
+        
+    def __hash__(self) -> int:
+        hashes = (hash(x) for x in self._components)
+        return functools.reduce(operator.xor, hashes, 0)
         
     def __getitem__(self, index):
         cls = type(self)
