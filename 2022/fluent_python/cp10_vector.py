@@ -29,7 +29,17 @@ class Vector:
         return (bytes([ord(self.typecode)]) + bytes(self._components))
     
     def __eq__(self, other):
-        return tuple(self) == tuple(other)
+        # return tuple(self) == tuple(other) # overhead
+        '''
+        if len(self) != len(other):
+            return False
+        for a,b in zip(self, other):
+            if a != b:
+                return False
+        return True
+        '''
+        # Pythonic!
+        return len(self) == len(other) and all(a == b for a, b in zip(self, other))
 
     def __abs__(self) -> float:
         return math.sqrt(sum(x * x for x in self))
@@ -106,3 +116,9 @@ if __name__ == '__main__':
     print(v.a)
     print(repr(v))
     '''
+    
+    v1 = Vector([10.0, 4.0, 5.0, 6,0, 7.0, 8.0, 3.0])
+    v2 = Vector([3.0, 4.0, 5.0, 6,0, 7.0, 8.0, 10.0])
+    print(v1==v2)
+    print(v==v2)
+    
