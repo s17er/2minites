@@ -48,10 +48,38 @@ class BingoCage(Tombola):
         
     def __call__(self):
         self.pick()
+        
+class LotteryBlower(Tombola):
+    def __init__(self, iterable):
+        self._balls = list(iterable)
+        
+    def load(self, iterable):
+        self._balls.extend(iterable)
+        
+    def pick(self):
+        try:
+            position = random.randrange(len(self._balls))
+        except ValueError:
+            raise LookupError('pick form empty LotteryBlower')
+        return self._balls.pop(position)
+        
+    def loaded(self):
+        return bool(self._balls)
+    
+    def inspect(self):
+        return tuple(sorted(self._balls))
 
 
 if __name__ == '__main__':
     cage = BingoCage(range(100))
+    while True:
+        try:
+            print(cage.pick())
+        except LookupError:
+            break
+    cage = BingoCage(range(100))
+
+    cage = LotteryBlower(range(100))
     while True:
         try:
             print(cage.pick())
