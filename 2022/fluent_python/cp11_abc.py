@@ -69,6 +69,25 @@ class LotteryBlower(Tombola):
     def inspect(self):
         return tuple(sorted(self._balls))
 
+@Tombola.register
+class TomboList(list):
+    def pick(self):
+        if self:
+            position = random.randrange(len(self))
+            return self.pop(position)
+        else:
+            raise LookupError('pop from empty TomboList')
+
+    load = list.extend
+    
+    def loaded(self):
+        return bool(self)
+    
+    def inspected(self):
+        return tuple(sorted(self))
+
+
+
 
 if __name__ == '__main__':
     cage = BingoCage(range(100))
@@ -85,4 +104,8 @@ if __name__ == '__main__':
             print(cage.pick())
         except LookupError:
             break
+        
+    print(issubclass(TomboList, Tombola))
+    tlist = TomboList(range(100))
+    print(isinstance(tlist, Tombola))
 
