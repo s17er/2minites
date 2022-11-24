@@ -17,4 +17,18 @@ fn main() {
     println!("{}", a);
     //println!("{}", a_ref1); // error.
 
+    let a = 42;
+    let ref_ref_ref_a = &&&a;
+    let ref_a = **ref_ref_ref_a;
+    let b = *ref_a;
+    println!("{} {}", a, b);
+    //println!("{}", a == ref_a); // error.
+
+    let (x,y,z) = (1,2,3);
+    let (a,b,c) = (4,5,6);
+    let (i,_,_) = (7,8,9);
+    println!("xyz= {} {} {}", x, y, z);
+    println!("abc= {} {} {}", a, b, c);
+    println!("  i= {}", i);
+
 }
