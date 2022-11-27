@@ -1,5 +1,6 @@
 import re
 import reprlib
+from collections import abc
 
 RE_WORD = re.compile(r'\w+')
 
@@ -23,3 +24,5 @@ if __name__ == '__main__':
     for w in s:
         print(w)
     print(list(s))
+    # behavior like iterable but Sentence is not subclass of Iterable.
+    print(issubclass(Sentence, abc.Iterable)) 
