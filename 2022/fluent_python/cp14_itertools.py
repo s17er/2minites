@@ -35,3 +35,31 @@ if __name__ == '__main__':
     print(list(zip('ABC', 'DEF')))
     print(list(itertools.zip_longest('ABC', 'DEFHG', fillvalue='?')))
     print(list(itertools.product('ABC', 'DEF')))
+    
+    # multiple
+    print(list(itertools.islice(itertools.count(1, .3), 3)))
+    print(list(itertools.islice(itertools.cycle("ABC"), 10)))
+    print(list(itertools.islice(itertools.repeat("A"), 10)))
+    
+    # combinatoric generator
+    # 長さが２となる要素の全組み合わせ
+    print(list(itertools.combinations("ABC", 2)))
+    # 重複を許す
+    print(list(itertools.combinations_with_replacement("ABC", 2)))
+    # すべての順列
+    print(list(itertools.permutations("ABC", 2)))
+    # デカルト積
+    print(list(itertools.product("ABC", repeat=2)))
+    
+    # groupby
+    print(list(itertools.groupby("LLLLAAGGG")))
+    for c,group in itertools.groupby("LLLLAAGGG"):
+        print(c, '->', list(group))
+    animals = ['duck', 'eagle', 'rat', 'girafee', 'bear', 'bat', 'dolphin', 'shark', 'lion']
+    animals.sort(key=len)
+    print(animals)
+    for c,group in itertools.groupby(animals, len):
+        print(c, '->', list(group))
+    for c,group in itertools.groupby(reversed(animals), len):
+        print(c, '->', list(group))
+    
