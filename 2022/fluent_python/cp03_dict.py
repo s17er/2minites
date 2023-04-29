@@ -30,6 +30,7 @@ def use_defaultdict():
     for c in l:
         index[c].append(100)
     print(index)
+    print(index['d']) # -> print []
     
 
 if __name__ == '__main__':
