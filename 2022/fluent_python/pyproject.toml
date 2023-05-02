@@ -8,6 +8,7 @@ authors = ["s17er <sinnerthesinner@gmail.com>"]
 python = "^3.8"
 numpy = "^1.23.2"
 requests = "^2.29.0"
+tqdm = "^4.65.0"
 
 [tool.poetry.dev-dependencies]
 
